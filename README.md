@@ -38,8 +38,3 @@ int main(){
 }
 ```
 
-emoji 
-
-
-&nbsp;
-:+1 
