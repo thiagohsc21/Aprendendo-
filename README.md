@@ -20,7 +20,6 @@ Lista Numerada:
  - [ ] Teste 1
  - [X] Teste 2
 
-&nbsp;
 [Facebook](https://www.facebook.com/profile.php?id=100000486515755)
 
 Nome | Idade | Cidade
@@ -40,4 +39,7 @@ int main(){
 ```
 
 emoji 
+
+
+&nbsp;
 :+1 
