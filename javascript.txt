@@ -1,0 +1,283 @@
+--- JavaScript ---
+
+-> Variáveis e Constantes <-
+
+var a = 3 (caiu em desuso e pode ser declarada 2x no mesmo escopo(???))
+let b = 4 (variavel que pode ser reatribuida)
+const c = 5 (cria constantes)
+
+var a = 30
+b = 40
+
+console. log(a, b, c) e gera como saída 30 40 5, var é esquisita!
+
+JavaScript possui uma tipagem dinâmica (tipagem fraca), isto é, um mesmo tipo pode receber
+diversos tipos de dados.
+
+let variable = 'Oi'
+console.log(variable) = Oi
+console.log(typeof variable) = string
+
+variable = 3.1234
+console.log(variable) = 3.1234
+console.log(typeof variable) = number
+ 
+Number : 
+const peso1 = 1.0
+const peso2 = Number('2.1')
+console.log(peso1, peso2) = 1 2
+console.log(Number.isInteger(peso1)) = true
+console.log(Number.isinteger(peso2)) = false
+
+console.log(variavel.toFixed(2)) = trunca uma variavel em 2 casa decimais
+console.log(variavel.toString()) = converte uma variavel pra string
+console.log(variavel.toString(2)) = converte o dado para binario
+
+*Number é uma função e number é um tipo*
+
+curiosidades do number
+console.log(7/0) = Infinity
+console.log("10"/2) = 5 porém console.log("10,2"/2) = NaN (not a number)
+console.log(0.1 + 0.7) = 0.79999999999999
+console.log(10.toString()) nao funciona! console.log((10).toString()) funciona!
+console.log((10.354).toFixed(2)) = 10.35 
+
+cont raio = 4.2
+const area = Math.PI * Math.pow(raio,2)
+Math é um objeto! É tipo a biblioteca do C
+
+String : pode usar tanto 'xxx' como "xxx"
+const nome = "Thiago"
+console.log(nome.charAt(4)) (char na posicao 4) = g
+console.log(nome.charCodeAt(3)) (pega o valor do char na posicao 3 na ASCII)
+console.log(nome.indexOf('T')) (ve se tem a letra no nome) = 0 (posicao 0)
+console.log(nome.substring(1)) (do char 1 ao final) = hiago
+console.log(nome.substring(0, 3)) (do char 0 ao 2) = Thiago
+console.log('Meu nome é '.concat(nome).concat("!")) = Meu nome é Thiago! 
+console.log('Meu nome é " + nome + "!") = Meu nome é Thiago!
+console.log(nome.replace(T, 'X')) = Xhiago
+console.log("Ana,Maria,Pedro".split(,)) = [Ana, Maria, Pedro] (cria um array com esses elementos)
+
+Template String : concatena mais facilmente
+let nome = "Thiago"
+const template = ` 
+    Olá                 (não precisa ser em várias linhas)
+    ${nome}!`
+console.log(template) = Olá
+                        Thiago!
+console.log(`1 + 1 = ${1+1}`) = 1 + 1 = 2
+
+(também podem ser passadas funções dentro do ${XfunctionX})
+cont up = texto => texto.toUpperCase()
+console.log(`Ei... ${up("cuidado")}!`) = Ei... CUIDADO!
+
+Boolean : diferentemente da linguagem C, o JavaScript nao possui um tipo boolean
+let variavel1 = true
+let variavel2 = false
+
+negar um valor numerico converte ele para boolean
+let valor = 1
+console.log(!valor) = false
+console.log(!!valor) = true
+
+FUNCIONA COMO UM IF (se nome não for definido, entao imprime desconhecido)
+let nome = 'Fulano'
+console.log(nome || 'Desconhecido') = Fulano
+caso o nome não tivesse preenchido, teríamos uma impressão Desconhecido.
+
+Vetor (Array) : ele não tem tamanho fixo e nem tipo de dados, então posso adicionar dados o tanto
+quanto quiser e também misturar todos os tipos de dados. 
+const valores = [7.7, 8.9, 6.3, 9.2]
+console.log(valores[0], valores[3]) = 7.7 9.2 
+console.log(valores[4]) = undefined 
+valores[4] = 12
+console.log(valores.lenght) = 5
+valores.push({id:3}, false, null, 'teste') 
+console.log(valores) = 7.7, 8.9, 6.3, 9.2, 12, { id:3 }, false, null, 'teste'
+console.log(valores.pop()) = teste (pop remove o ultimo elemento)
+delete valores[0] (remove o primeiro elemento do array)
+console.log(valores) =  empty, 8.9, 6.3, 9.2, 12, { id:3 }, false, null 
+
+Object : é tipo uma struct em C 
+const prod1 = {}
+prod1.nome = 'Celular'
+prod1.preco = 1200.90
+ou
+const prod1 = {
+    nome: 'Celular'
+    preco: 1200.90
+}
+console.log(prod1) = {nome: Celular 
+                      preco: 1200.90}
+
+pode-se ter objetos aninhados
+const prod2 = {
+    nome: 'Thiago'
+    idade: '21'
+    endereco: {
+        pais: Cidade
+        cidade: Campinas
+        rua: Frei Caneca
+        numero: 202
+    }
+}
+se quiser tirar algum item de um obj, é só
+delete prod2.idade
+
+Null e Undefined : 
+const a = {name: Teste}
+const b = a 
+a variável 'a' contém o endereço do objeto que possui o nome Teste
+como b = a, 'b' passa a armazenar o endereço apontado por a, entao
+b.name = 'Thiago'
+console.log(a.name) = Thiago
+
+let valor
+console.log(valor) = undefined (possui lixo de memória)
+valor = null (nao aponta para nenhum lugar na memória)
+console.log(valor) = null
+
+-> Funções <-
+function ImprimirSoma(a, b) {
+    console.log(a+b)
+}
+
+ImprimirSoma(2, 3) = 5
+ImprimirSoma(2) (2 + undefined) = NaN
+ImprimirSoma(2, 10, 4, 7, 3) = 12
+
+function soma(a, b = 0) {
+    return a+b
+}
+
+console.log(soma(2, 3)) = 5
+
+Armazena Função em uma variável
+const ImprimirSoma = function (a, b) {
+    console.log(a+b)
+}
+
+ImprimirSoma(2, 3) = 5
+
+Funcao arrow
+const soma = (a,b) => {
+    return a+b
+}
+
+console.log(soma(2,3)) = 5
+
+retorno implicito
+const subtracao = (a,b) => a-b
+
+Declaração com Var 
+var numero = 1 
+{
+    var numero = 2
+    console.log('dentro = ', numero) = 2
+}
+
+console.log('fora = ', numero) = 2
+A variável VAR nao possui varios escopos igual a C, só escopo global e de função
+
+for (var i = 0; i < 10; i++){
+    console.log(i) = {0,1,2,3,4,5,6,7,8,9,10}
+}
+console.log(i) = 10
+
+Declaração com Let
+ let numero = 1
+ {
+     let numero = 2
+     console.log(numero) = 2
+ }
+
+ console.log(numero) = 1
+
+for (let i = 0; i < 10; i++){
+    console.log(i) = {0,1,2,3,4,5,6,7,8,9,10}
+}
+console.log(i) = i is not defined bla  bla (fora do bloco)
+
+A variável let possui varios escopos, diferentemente da var. Escopo global/função e de bloco
+
+Hoisting (conceito de jogar pra cima)
+console.log(a) = undefined
+var a = 2
+console.log(a) = 2
+
+A linguagem permite com que jogue o var pra cima, ficnado assim
+var a
+console.log(a) = undefined
+a = 2
+console.log(a) = 2
+
+console.log(b) = ERRO
+let b = 2
+console.log(b) = 2
+
+Operadores Destructuring
+const pessoa = {
+    nome: 'Ana',
+    idade: 5,
+    endereco: {
+        logradouro: 'Rua ABC',
+        numero: 1000
+    }
+}
+
+Extrai do objeto e armazena nas variaveis nome e idade
+const { nome, idade } = pessoa
+console.log(nome, idade) = Ana 5
+
+Extrai do objeto os valores de nome e idade e atribuem a n e i 
+const { nome:n, idade:i } = pessoa
+console.log(n, i) = Ana 5
+
+const { endereco : { logradouro, numero, cep} } = pessoa
+console.log(logradouro, numero, cep) = Rua ABC 1000 undefined
+
+const [n1, , n3, n5, n6 = 0] = [10, 7, 9, 8]
+console.log(n1, n3, n5, n6) = 10 9 undefined 0
+
+O parâmetro da funcao rand é um objeto cujos elementos são o min e max 
+function rand( { min = 0, max = 1000 } ) {
+    const valor = Math.random() * (max-min) + min
+    return Math.floor(valor)
+}
+
+const obj = { max:50, min:40 }
+console.log(rand(obj)) = gera valores entre 40 e 50
+console.log(rand({min:955})) = gera valores entre 955 e mil
+console.log(rand({})) = gera valores entre 0 e 1000
+console.log(rand()) = ERRO
+
+function rand([min = 0,  max = 1000]) {
+    if(min > max) [min, max] = [max, min] //se min>max o min recebe o max e o max recebe o min 
+    const valor = Math.random() * (max-min) + min
+    return Math.floor(valor)
+}
+
+cnosole.log(rand([50,40])) = entre 40 e 50
+console.log(rand([955])) = entre 955 e 1000
+
+Operadores Relacionais
+'1' == 1 => true, o numero 1 é igual a 1
+'1' === 1 => false, a stirng 1 é estritamente igual ao numero 1? não, tipos diferentes
+'3' != 3 => false, o numero 3 é igual a 3
+'3' !== => true, a string três é estritamente diferente do num 3? sim, tipos diferentes
+> < >= <= igual linguagem C
+
+Operadores Lógicos
+v xor v -> false        f xor v -> true
+v xor f -> true         f xor f -> false
+!v -> false             !f -> true
+
+or = || (pipe 2x)       xor = != 
+
+Operador Ternário
+nota >= 9 ? "Aprovado" : "Reprovado" 
+se nota >= 9 => Aprovado
+se nota < 9 => Reprovado
+
+obs : let x = 2 ** 3
+      console.log(x) = 2³ = 8
