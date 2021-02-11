@@ -281,3 +281,29 @@ se nota < 9 => Reprovado
 
 obs : let x = 2 ** 3
       console.log(x) = 2³ = 8
+
+this.c = 123
+this.b = 456
+this.d = 789
+
+console.log(module.exports) = { 123, 456, 789 }
+module.exports === this!!!!!
+
+- Tratamento de Erro - 
+
+function tratarErroELancar(erro){
+    throw new Error ('Erro doido')
+}
+
+function imprimirNomeGritado(obj){
+    try{
+        console.log(obj.name.toUpperCase() + '!!!") 
+    } catch(e) {
+        tratarErroELancar(e)
+    } finally {
+        console.log('final')
+    }
+}
+
+const obj = { nome: 'Roberto' }
+imprimirNomeGritado(obj)
